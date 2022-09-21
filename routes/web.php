@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +16,13 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::redirect('/', '/posts');
-
-Route::get('posts', [PostController::class, 'index'])
+Route::get('/', [PostController::class, 'index'])
     ->name('posts.index');
 
 Route::get('posts/{post:slug}', [PostController::class, 'show'])
     ->name('posts.show');
 
+Route::get('categories/{category:slug}', [CategoryController::class, 'show'])
+    ->name('categories.show');
+
+// Route::get('authors/{}')
