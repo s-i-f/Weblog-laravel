@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\SessionsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +28,17 @@ Route::get('posts/{post:slug}', [PostController::class, 'show'])
 Route::get('categories/{category:slug}', [CategoryController::class, 'show'])
     ->name('categories.show');
 
-// Route::get('authors/{}')
+Route::get('authors/{user:name}', [UserController::class, 'show'])
+    ->name('users.show');
+
+Route::get('register', [UserController::class, 'create'])
+    ->name('users.create')->middleware('guest');
+
+Route::post('register', [UserController::class, 'store'])
+    ->name('users.store')->middleware('guest');
+
+Route::post('logout', [SessionsController::class, 'destroy'])
+    ->name('session.destroy');
+
+Route::post('login', [SessionsController::class, 'create'])
+    ->name('session.create')->middleware('guest');

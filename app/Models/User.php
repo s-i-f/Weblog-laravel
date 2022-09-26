@@ -20,9 +20,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'username',
-        'role_id',
         'email',
         'password',
+        'is_premium'
     ];
 
     /**
@@ -44,8 +44,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function role() {
-        return $this->belongsTo(Role::class);
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
     }
     
     public function posts()  {
