@@ -7,7 +7,6 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SessionsController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,29 +18,28 @@ use App\Http\Controllers\SessionsController;
 |
 */
 
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
 Route::get('/', [PostController::class, 'index'])
     ->name('posts.index');
-
 Route::get('posts/{post:slug}', [PostController::class, 'show'])
     ->name('posts.show');
-
 Route::get('categories/{category:slug}', [CategoryController::class, 'show'])
     ->name('categories.show');
-
 Route::get('authors/{user:name}', [UserController::class, 'show'])
     ->name('users.show');
-
 Route::get('register', [UserController::class, 'create'])
     ->name('users.create')->middleware('guest');
-
 Route::post('register', [UserController::class, 'store'])
     ->name('users.store')->middleware('guest');
-
 Route::post('logout', [SessionsController::class, 'destroy'])
-    ->name('sessions.destroy')->middleware('auth');
-
+    ->name('session.destroy');
 Route::get('login', [SessionsController::class, 'create'])
     ->name('sessions.create')->middleware('guest');
-
 Route::post('login', [SessionsController::class, 'store'])
     ->name('sessions.store')->middleware('guest');
+
+require __DIR__.'/auth.php';
