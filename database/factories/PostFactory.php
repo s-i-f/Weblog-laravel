@@ -32,7 +32,7 @@ class PostFactory extends Factory
             'name' => fake()->sentence(),
             'slug' => fake()->slug(),
             'excerpt' => '<p>' . fake()->sentence() . '</p>',
-            'body' => '<p>' . fake()->paragraph() . '</p>',
+            'body' => '<p>' . fake()->sentence() . '</p>',
         ];
     }
 }

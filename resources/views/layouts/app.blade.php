@@ -21,7 +21,7 @@
         @auth
         <span>Welcome, {{ auth()->user()->name }}!</span>
 
-        <form action="{{ route('session.destroy') }}" method="post">
+        <form action="{{ route('sessions.destroy') }}" method="post">
             @csrf
             <button type="submit">Log out</button>
         </form>
@@ -30,9 +30,9 @@
             @csrf
             <button type="submit">Register</button>
         </form>
-        <form  action="{{ route('session.create') }}">
-            @csrf
-            <button type="submit">Login</button>
+        <form  action="{{ route('sessions.create') }}" method="get">
+            @csrf  
+            <button type="submit">Log in</button>
         </form>
         @endauth
 

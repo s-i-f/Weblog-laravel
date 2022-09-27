@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Validationexception;
 
 class SessionsController extends Controller
 {
@@ -13,7 +14,25 @@ class SessionsController extends Controller
      */
     public function create()
     {
-        //
+        return view('sessions.create');
+        // breeze:install (voor login)
+    }
+
+    public function store()
+    {
+        $attributes = request()->validate([
+            'username' => ['required', 'exists:users,username'], 
+            'password' => ['required', ]
+        ]);
+
+        if (! auth()->attempt($attributes)) {
+            throw ValidationException::withMessages([
+                'username' => 'Your provided credentials could not be verified.'
+            ]);
+        }
+
+        return redirect('/')->with('success', 'Welcome back!');
+
     }
 
         /**

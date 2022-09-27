@@ -38,7 +38,10 @@ Route::post('register', [UserController::class, 'store'])
     ->name('users.store')->middleware('guest');
 
 Route::post('logout', [SessionsController::class, 'destroy'])
-    ->name('session.destroy');
+    ->name('sessions.destroy')->middleware('auth');
 
-Route::post('login', [SessionsController::class, 'create'])
-    ->name('session.create')->middleware('guest');
+Route::get('login', [SessionsController::class, 'create'])
+    ->name('sessions.create')->middleware('guest');
+
+Route::post('login', [SessionsController::class, 'store'])
+    ->name('sessions.store')->middleware('guest');
