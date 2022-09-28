@@ -22,6 +22,9 @@ use App\Http\Controllers\SessionsController;
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+Route::get('/home', function () {
+    return view('welcome');
+});
 
 Route::get('/', [PostController::class, 'index'])
     ->name('posts.index');
@@ -36,7 +39,7 @@ Route::get('register', [UserController::class, 'create'])
 Route::post('register', [UserController::class, 'store'])
     ->name('users.store')->middleware('guest');
 Route::post('logout', [SessionsController::class, 'destroy'])
-    ->name('session.destroy');
+    ->name('sessions.destroy');
 Route::get('login', [SessionsController::class, 'create'])
     ->name('sessions.create')->middleware('guest');
 Route::post('login', [SessionsController::class, 'store'])

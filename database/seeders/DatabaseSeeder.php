@@ -18,6 +18,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+        User::create([
+            'name' => 'Admin',
+            'username' => 'Admin',
+            'email' => 'admin@example.com',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+            'is_premium' => true
+            // 'remember_token' => null,
+        ]);
         Post::factory(5)->create();
     }
 }

@@ -1,4 +1,6 @@
 <x-app>
+    <x-slot name="header">
+    </x-slot>
     <x-slot name="slot">
         @foreach ( $posts as $post)
             <article> 
