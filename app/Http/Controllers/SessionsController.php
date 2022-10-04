@@ -15,7 +15,6 @@ class SessionsController extends Controller
     public function create()
     {
         return view('sessions.create');
-        // breeze:install (voor login)
     }
 
     public function store()
@@ -24,11 +23,6 @@ class SessionsController extends Controller
             'username' => ['required'], 
             'password' => ['required' ]
         ]);
-
-        dd(auth()->attempt([
-            'email' => 'admin@example.com', 
-            'password' => 'password'
-        ]));
         
         if (! auth()->attempt($attributes)) {
             throw ValidationException::withMessages([

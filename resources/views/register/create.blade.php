@@ -1,6 +1,8 @@
 <x-app>
+    <x-slot name="header">
+    </x-slot>
     <x-slot name="slot">
-        <form action="{{ route('users.store') }}" method="post">
+        <form action="{{ route('users.store') }}" method="post" class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
             @method('POST')  
             @csrf
             <label for="name">Name:</label><br>
@@ -35,7 +37,9 @@
             @error('is_premium')
                 <p>{{ $message }}</p>
             @enderror
-            <br><button type="submit">Submit</button>
+            <br><button type="submit"
+                class="border-solid text-black py-2 px-10 rounded-2xl hover:bg-blue-600">
+                Submit</button>
         </form>
     </x-slot>
 </x-app>
