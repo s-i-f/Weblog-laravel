@@ -35,6 +35,15 @@
 
                     <x-slot name="content">
                         <!-- Authentication -->
+                        <form method="GET" action="{{ route('posts.index') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('posts.index')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Posts by me (need to make new route!)') }}
+                            </x-dropdown-link>
+                        </form>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 

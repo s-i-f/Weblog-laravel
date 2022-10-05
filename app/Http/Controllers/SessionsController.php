@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validationexception;
+use Illuminate\Support\Facades\Auth;
 
 class SessionsController extends Controller
 {
@@ -19,6 +20,7 @@ class SessionsController extends Controller
 
     public function store()
     {
+
         $attributes = request()->validate([
             'username' => ['required'], 
             'password' => ['required' ]
@@ -29,8 +31,9 @@ class SessionsController extends Controller
                 'username' => 'Your provided credentials could not be verified.'
             ]);
         }
-
-        return redirect('/')->with('success', 'Welcome back!');
+        
+        $user = Auth::user();
+        return redirect('/')->with(['user' => $user]);
 
     }
 
