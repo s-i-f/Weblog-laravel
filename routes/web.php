@@ -53,4 +53,11 @@ Route::get('login', [SessionsController::class, 'create'])
 Route::post('login', [SessionsController::class, 'store'])
     ->name('sessions.store')->middleware('guest');
 
+Route::get('admin/posts/create', [PostController::class, 'create'])
+    ->name('posts.create');
+
+Route::post('admin/posts', [PostController::class, 'store'])
+    ->name('posts.store');
+
+
 require __DIR__.'/auth.php';
