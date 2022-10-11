@@ -29,7 +29,8 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {   
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('username', $request->username)->first();
+        dd($user);
         Auth::login($user);
         //$request->authenticate();
 

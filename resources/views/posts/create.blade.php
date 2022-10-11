@@ -1,8 +1,6 @@
 <x-app>
-    <x-slot name="header">
-    </x-slot>
     <x-slot name="slot" >
-        <section class="px-6 py-8" >
+        <section class="p-8" >
             <form action="{{ route('posts.store') }}" method="post">
                 @csrf
                 <x-input-label for="name">Title:</x-input-label><br>
@@ -30,6 +28,15 @@
                 <x-input-label for="body">Body:</x-input-label><br>
                 <x-text-input type="text" id="body" name="body" value="{{ old('body') }}" required></x-text-input>
                 @error('body')
+                    <p>{{ $message }}</p>
+                @enderror
+                <br>
+                <x-input-label for="premium">Premium:</x-input-label><br>
+                <input type="radio" id="premium" name="is_premium" value="1">
+                <label for="premium">Yes</label>
+                <input type="radio" id="premium" name="is_premium" value="0">
+                <label for="premium">No</label><br>
+                @error('is_premium')
                     <p>{{ $message }}</p>
                 @enderror
                 <br>
