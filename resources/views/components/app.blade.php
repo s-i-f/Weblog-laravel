@@ -15,7 +15,7 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-slate-100">
-                @include('layouts.guest')
+                @include('layouts.layout')
                 
             <!-- Page Content -->
             <main>

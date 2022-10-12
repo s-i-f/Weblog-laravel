@@ -3,43 +3,19 @@
         @guest 
             @foreach ($posts as $post)
                 @if (! $post->premium)
-                    <article class="max-w-7xl px-8 m-6"> 
-                        <a class="font-bold" href="{{ URL::route('posts.show', $post->slug) }}">
-                            <h2>{{ $post->name }}</h2>
-                        </a>
-                        <p>Written by <a class="font-bold" href="{{ URL::route('users.show', $post->user->name) }}">{{ $post->user->name }}</a> 
-                            in <a class="font-bold" href="{{ URL::route('categories.show', $post->category->slug) }}">{{ $post->category->name }}</a></p>
-                        <p>Published at {{$post->created_at}}</p>
-                        <div>{!! $post->excerpt !!}</div>
-                    </article>
+                    <x-post.excerpt :post="$post"></x-post.excerpt>
                 @endif
             @endforeach
         @else
             @if (!auth()->user()->is_premium)
                 @foreach ($posts as $post)
                     @if (! $post->premium)
-                        <article class="max-w-7xl px-8 m-6"> 
-                            <a class="font-bold" href="{{ URL::route('posts.show', $post->slug) }}">
-                                <h2>{{ $post->name }}</h2>
-                            </a>
-                            <p>Written by <a class="font-bold" href="{{ URL::route('users.show', $post->user->name) }}">{{ $post->user->name }}</a> 
-                                in <a class="font-bold" href="{{ URL::route('categories.show', $post->category->slug) }}">{{ $post->category->name }}</a></p>
-                            <p>Published at {{$post->created_at}}</p>
-                            <div>{!! $post->excerpt !!}</div>
-                        </article>
+                        <x-post.excerpt :post="$post"></x-post.excerpt>
                     @endif
                 @endforeach
             @else 
                 @foreach ($posts as $post)
-                    <article class="max-w-7xl px-8 m-6"> 
-                        <a class="font-bold" href="{{ URL::route('posts.show', $post->slug) }}">
-                            <h2 >{{ $post->name }}</h2>
-                        </a>
-                        <p>Written by <a class="font-bold" href="{{ URL::route('users.show', $post->user->name) }}">{{ $post->user->name }}</a> 
-                            in <a class="font-bold" href="{{ URL::route('categories.show', $post->category->slug) }}">{{ $post->category->name }}</a></p>
-                        <p>Published at {{$post->created_at}}</p>
-                        <div>{!! $post->excerpt !!}</div>
-                    </article>
+                    <x-post.excerpt :post="$post"></x-post.excerpt>
                 @endforeach
             @endif
         @endguest

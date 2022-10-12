@@ -31,6 +31,7 @@ class UserFactory extends Factory
             'username' => fake()->unique()->username(),
             'password' => 'password',
             'remember_token' => Str::random(10),
+            'is_premium' => mt_rand(0, 1),
         ];
     }
 

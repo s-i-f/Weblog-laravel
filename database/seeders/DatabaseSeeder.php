@@ -6,8 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Post;
-use App\Models\Category;
-use App\Models\Role;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,11 +20,11 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Admin',
-            'username' => 'Admin',
+            'username' => 'admin',
             'email' => 'admin@example.com',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-            'is_premium' => true
-            // 'remember_token' => null,
+            'password' => 'password',
+            'is_premium' => true,
+            'remember_token' => Str::random(10),
         ]);
         Post::factory(5)->create();
     }

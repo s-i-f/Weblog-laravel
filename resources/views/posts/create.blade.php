@@ -26,16 +26,17 @@
                 @enderror
                 <br>
                 <x-input-label for="body">Body:</x-input-label><br>
-                <x-text-input type="text" id="body" name="body" value="{{ old('body') }}" required></x-text-input>
+                <x-textarea-input name="body"></x-textarea-input>
                 @error('body')
                     <p>{{ $message }}</p>
                 @enderror
                 <br>
                 <x-input-label for="premium">Premium:</x-input-label><br>
                 <input type="radio" id="premium" name="is_premium" value="1">
-                <label for="premium">Yes</label>
-                <input type="radio" id="premium" name="is_premium" value="0">
-                <label for="premium">No</label><br>
+                <x-input-label for="premium">Yes</x-input-label>
+                <input type="radio" id="premium" name="is_premium" value="0">                
+                <x-input-label for="premium">No</x-input-label><br>
+
                 @error('is_premium')
                     <p>{{ $message }}</p>
                 @enderror
