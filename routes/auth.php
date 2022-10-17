@@ -61,6 +61,15 @@ Route::middleware('auth')->group(function () {
 
     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
+    Route::get('user/profile', [UserController::class, 'index'])
+                ->name('users.index');
+
+    Route::get('{user}/profile/edit', [UserController::class, 'edit'])
+                ->name('users.edit');
+
+    Route::get('{user:username}/{post:slug}/edit', [PostController::class, 'edit'])
+                ->name('posts.edit');
+
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 });

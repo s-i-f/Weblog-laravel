@@ -52,12 +52,12 @@
 
                         <x-slot name="content">
                             <!-- Authentication -->
-                            <form method="GET" action="{{ route('posts.create') }}">
+                            <form method="GET" action="{{ route('users.index') }}">
                                 @csrf
-                                <x-dropdown-link :href="route('posts.create')"
+                                <x-dropdown-link :href="route('users.index')"
                                         onclick="event.preventDefault();
                                                     this.closest('form').submit();">
-                                    {{ __('Create new post') }}
+                                    {{ __('Profile overview') }}
                                 </x-dropdown-link>
                             </form>
 
@@ -66,7 +66,7 @@
                                 <x-dropdown-link :href="route('posts.create')"
                                         onclick="event.preventDefault();
                                                     this.closest('form').submit();">
-                                    {{ __('Profile overview') }}
+                                    {{ __('Create new post') }}
                                 </x-dropdown-link>
                             </form>
 
