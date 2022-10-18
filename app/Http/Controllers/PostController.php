@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\Post;
@@ -18,6 +19,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::latest()->with('user', 'category')->get();
+        
         return view('posts.index', ['posts' => $posts]);
     }
 
@@ -39,15 +41,17 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $attributes = request()->validate([
+        $attributes = $request->validate([
             'name' => 'required',
             'excerpt' => 'required',
             'body' => 'required',
-            'category_id' => ['required', Rule::exists('categories', 'id')]
+            'category_id' => ['required', Rule::exists('categories', 'id'),
+            'is_premium' => 'required']
         ]);
         $attributes['slug']= Str::slug(request('name'));
-        Auth::user()->posts()->create($attributes);
-        return redirect('/');
+        Auth::user()->posts()->create($attributes);        
+        return redirect()->route('users.index'); 
+
     }
 
     /**
@@ -69,7 +73,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.edit', ['post' => $post]);
+        $categories = Category::all();
+        
+        return view('posts.edit', ['post' => $post, 'categories' => $categories]);
     }
 
     /**
@@ -81,7 +87,18 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $attributes = $request->validate([
+            'name' => 'required',
+            'excerpt' => 'required',
+            'body' => 'required',
+            'category_id' => ['required', Rule::exists('categories', 'id'),
+            'is_premium' => 'required']
+        ]);
+        $attributes['slug'] = Str::slug(request('name'));
+        $post->fill($attributes);
+        $post->save();
+        return redirect()->route('users.index'); 
+
     }
 
     /**
@@ -92,6 +109,10 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        if($post){
+            $post->delete();
+        }
+        return redirect()->route('users.index'); 
+ 
     }
 }

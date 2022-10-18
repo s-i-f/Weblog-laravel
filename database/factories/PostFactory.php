@@ -3,9 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Category;
 use App\Models\Post;
-use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
@@ -27,12 +25,13 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::factory(),
-            'category_id' => Category::factory(),
+            'user_id' => mt_rand(2, 7),
+            'category_id' => mt_rand(1, 10),
             'name' => fake()->sentence(),
             'slug' => fake()->slug(),
             'excerpt' => fake()->sentence() ,
-            'body' => fake()->sentence(2),
+            'body' => fake()->paragraph(2),
+            'premium' => mt_rand(0, 1),
         ];
     }
 }

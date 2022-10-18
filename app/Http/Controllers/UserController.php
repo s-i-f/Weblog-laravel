@@ -38,7 +38,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $attributes = request()->validate([
+        $attributes = $request->validate([
                 'name' => ['required', 'min:2', 'max:255' ],
                 'username' => ['required', 'min:3', 'max:255', Rule::unique('users', 'username')], 
                 'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')],
@@ -67,9 +67,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($user)
+    public function edit(User $user)
     {
-        dd($user);
         return view('sessions.edit', ['user' => $user]); 
     }
 
@@ -80,9 +79,22 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $updatedUser = User::findOrFail($user->id);
+        
+        
+        
+        $attributes = $request->validate([
+            'name' => ['required', 'min:2', 'max:255' ],
+            'username' => ['required', 'min:3', 'max:255', Rule::unique('users', 'username')->ignore($user->id)], 
+            'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user->id)],
+        ]);
+        // dd($attributes);
+        
+        $updatedUser->fill($attributes);
+        $updatedUser->save();
+        return redirect()->route('users.index');
     }
 
     /**

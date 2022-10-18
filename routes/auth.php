@@ -61,14 +61,23 @@ Route::middleware('auth')->group(function () {
 
     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
-    Route::get('user/profile', [UserController::class, 'index'])
+    Route::get('admin/profile', [UserController::class, 'index'])
                 ->name('users.index');
 
-    Route::get('{user}/profile/edit', [UserController::class, 'edit'])
+    Route::get('{user:username}/profile/edit', [UserController::class, 'edit'])
                 ->name('users.edit');
 
-    Route::get('{user:username}/{post:slug}/edit', [PostController::class, 'edit'])
+    Route::post('{user:username}/profile/edit', [UserController::class, 'update'])
+                ->name('users.update');
+
+    Route::get('admin/{post:slug}/edit', [PostController::class, 'edit'])
                 ->name('posts.edit');
+    
+    Route::post('admin/{post:slug}/edit', [PostController::class, 'update'])
+                ->name('posts.update');
+
+    Route::get('admin/{post:slug}/delete', [PostController::class, 'destroy'])
+                ->name('posts.destroy');
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
