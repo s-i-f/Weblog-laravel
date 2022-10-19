@@ -11,7 +11,7 @@
                 <br>
                 <x-input-label for="category_id">Category:</x-input-label><br>
                     <select class="rounded-md shadow-sm border-slate-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="category_id" id="category" value="{{ old('category_id') }}" >
-                        @foreach (\App\Models\Category::all() as $category)
+                        @foreach ($categories as $category)
                             <option value="{{$category->id}}">{{ucwords($category->name)}}</option>
                         @endforeach
                     </select>

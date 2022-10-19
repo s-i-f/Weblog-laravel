@@ -9,6 +9,7 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
+
 class PostController extends Controller
 {
     /**
@@ -18,8 +19,14 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->with('user', 'category')->get();
-        
+        if (!Auth::check()) {
+            $posts = Post::latest()->with('user', 'category')->where('premium', 0)->get();
+        } elseif (!Auth::user()->is_premium) {
+            $posts = Post::latest()->with('user', 'category')->where('premium', 0)->get();
+        } else {
+            $posts = Post::latest()->with('user', 'category')->get();
+        };
+
         return view('posts.index', ['posts' => $posts]);
     }
 
@@ -30,7 +37,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $categories = Category::all();
+
+        return view('posts.create', ['categories' => $categories]);
     }
 
     /**
@@ -62,7 +71,14 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('posts.post', ['post' => $post]);
+        if (!Auth::check()) {
+            return redirect('/');
+        } elseif (!Auth::user()->is_premium) {            
+            return redirect('/');
+        } else {
+            return view('posts.post', ['post' => $post]);
+        };
+        
     }
 
     /**

@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('sessions.overview',  ['posts' => $user->posts]);
+        return view('sessions.overview',  ['posts' => $user->posts->sortByDesc('created_at')]);
     }
 
     /**
@@ -58,7 +58,15 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('posts.author', ['posts' => $user->posts]);
+        if (!Auth::check()) {
+            $posts = $user->posts->where('premium', 0)->sortByDesc('created_at'); // regel 62 & 64 kunnen samen
+        } elseif (!Auth::user()->is_premium) {
+            $posts = $user->posts->where('premium', 0)->sortByDesc('created_at');
+        } else {
+            $posts = $user->posts->sortByDesc('created_at');
+        };
+
+        return view('posts.author', ['posts' => $posts]);
     }
 
     /**
@@ -83,14 +91,11 @@ class UserController extends Controller
     {
         $updatedUser = User::findOrFail($user->id);
         
-        
-        
         $attributes = $request->validate([
             'name' => ['required', 'min:2', 'max:255' ],
             'username' => ['required', 'min:3', 'max:255', Rule::unique('users', 'username')->ignore($user->id)], 
             'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user->id)],
         ]);
-        // dd($attributes);
         
         $updatedUser->fill($attributes);
         $updatedUser->save();

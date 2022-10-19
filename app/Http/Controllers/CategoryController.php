@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -46,7 +47,15 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('posts.category', ['posts' => $category->posts]);
+        if (!Auth::check()) {
+            $posts = $category->posts->where('premium', 0)->sortByDesc('created_at');
+        } elseif (!Auth::user()->is_premium) {
+            $posts = $category->posts->where('premium', 0)->sortByDesc('created_at');
+        } else {
+            $posts = $category->posts->sortByDesc('created_at');
+        };
+        
+        return view('posts.category', ['posts' => $posts]);
     }
 
     /**
