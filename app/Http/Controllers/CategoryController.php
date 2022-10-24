@@ -47,9 +47,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        if (!Auth::check()) {
-            $posts = $category->posts->where('premium', 0)->sortByDesc('created_at');
-        } elseif (!Auth::user()->is_premium) {
+        if (!Auth::check() || !Auth::user()->is_premium) {
             $posts = $category->posts->where('premium', 0)->sortByDesc('created_at');
         } else {
             $posts = $category->posts->sortByDesc('created_at');

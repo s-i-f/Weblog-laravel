@@ -1,7 +1,7 @@
 <x-app>
     <x-slot name="slot" >
         <section class="p-8" >
-            <form action="" method="post">
+            <form action="{{ route('posts.update', $post->slug) }}" method="post">
                 @csrf
                 <x-input-label for="name">Title:</x-input-label><br>
                     <x-text-input type="text" name="name" id="name" value="{{ $post->name }}"></x-text-input>
@@ -35,15 +35,14 @@
                     <x-post.form.error name="body"/>
 
                 <br>
-                <x-input-label for="premium">Premium:</x-input-label><br>
-                    <input type="radio" id="premium" name="is_premium" value="1">
-                    <x-input-label for="premium">Yes</x-input-label>
-                    <input type="radio" id="premium" name="is_premium" value="0">                
-                    <x-input-label for="premium">No</x-input-label><br>
+                <x-input-label for="is_premium">Premium:</x-input-label><br>
+                    <input type="radio" id="is_premium" name="is_premium" value="1">
+                    <x-input-label for="is_premium">Yes</x-input-label>
+                    <input type="radio" id="is_premium" name="is_premium" value="0">                
+                    <x-input-label for="is_premium">No</x-input-label><br>
 
-                    <x-post.form.error name="premium"/>
+                    <x-post.form.error name="is_premium"/>
 
-                <br>
                 <br>
                 <x-primary-button>Submit</x-primary-button>
             </form>

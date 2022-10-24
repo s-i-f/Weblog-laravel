@@ -19,9 +19,10 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->string('name');
             $table->string('slug');
-            $table->string('excerpt');
-            $table->string('body');
-            $table->boolean('premium')->default(false);
+            $table->string('thumbnail')->nullable();
+            $table->text('excerpt');
+            $table->text('body');
+            $table->boolean('is_premium')->default(false);
             $table->timestamps();
         });
     }

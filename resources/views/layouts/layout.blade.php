@@ -57,7 +57,7 @@
                                 <x-dropdown-link :href="route('users.index')"
                                         onclick="event.preventDefault();
                                                     this.closest('form').submit();">
-                                    {{ __('Profile overview') }}
+                                    {{ 'Profile overview' }}
                                 </x-dropdown-link>
                             </form>
 

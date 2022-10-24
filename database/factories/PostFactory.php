@@ -30,8 +30,8 @@ class PostFactory extends Factory
             'name' => fake()->sentence(),
             'slug' => fake()->slug(),
             'excerpt' => fake()->sentence() ,
-            'body' => fake()->paragraph(2),
-            'premium' => mt_rand(0, 1),
+            'body' => fake()->paragraph(),
+            'is_premium' => mt_rand(0, 1),
         ];
     }
 }

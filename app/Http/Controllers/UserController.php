@@ -39,11 +39,11 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $attributes = $request->validate([
-                'name' => ['required', 'min:2', 'max:255' ],
-                'username' => ['required', 'min:3', 'max:255', Rule::unique('users', 'username')], 
-                'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')],
-                'password' => ['required', 'min:7', 'max:255'],
-                'is_premium' => ['required', 'boolean']
+            'name' => ['required', 'min:2', 'max:255' ],
+            'username' => ['required', 'min:3', 'max:255', Rule::unique('users', 'username')], 
+            'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')],
+            'password' => ['required', 'min:7', 'max:255'],
+            'is_premium' => ['required', 'boolean']
         ]);
         
         auth()->login(User::create($attributes));
@@ -58,12 +58,10 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        if (!Auth::check()) {
-            $posts = $user->posts->where('premium', 0)->sortByDesc('created_at'); // regel 62 & 64 kunnen samen
-        } elseif (!Auth::user()->is_premium) {
-            $posts = $user->posts->where('premium', 0)->sortByDesc('created_at');
-        } else {
-            $posts = $user->posts->sortByDesc('created_at');
+        $posts = $user->posts->sortByDesc('created_at');
+
+        if (!Auth::check() || !Auth::user()->is_premium) {
+            $posts = $user->posts->where('is_premium', 0)->sortByDesc('created_at');
         };
 
         return view('posts.author', ['posts' => $posts]);

@@ -19,14 +19,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        if (!Auth::check()) {
-            $posts = Post::latest()->with('user', 'category')->where('premium', 0)->get();
-        } elseif (!Auth::user()->is_premium) {
-            $posts = Post::latest()->with('user', 'category')->where('premium', 0)->get();
-        } else {
-            $posts = Post::latest()->with('user', 'category')->get();
+        $posts = Post::latest()->with('user', 'category')->get();
+        
+        if (!Auth::check() || !Auth::user()->is_premium) {
+            $posts = Post::latest()->with('user', 'category')->where('is_premium', 0)->get();
         };
-
+        
         return view('posts.index', ['posts' => $posts]);
     }
 
@@ -71,13 +69,14 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        if (!Auth::check()) {
-            return redirect('/');
-        } elseif (!Auth::user()->is_premium) {            
-            return redirect('/');
-        } else {
+        if (!Auth::check() || !Auth::user()->is_premium) {
+            if ($post->is_premium) {
+                return redirect('/');
+            } 
             return view('posts.post', ['post' => $post]);
         };
+
+        return view('posts.post', ['post' => $post]);
         
     }
 
@@ -90,7 +89,6 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
-        
         return view('posts.edit', ['post' => $post, 'categories' => $categories]);
     }
 
@@ -107,8 +105,8 @@ class PostController extends Controller
             'name' => 'required',
             'excerpt' => 'required',
             'body' => 'required',
-            'category_id' => ['required', Rule::exists('categories', 'id'),
-            'is_premium' => 'required']
+            'category_id' => ['required', Rule::exists('categories', 'id')],
+            'is_premium' => 'required'
         ]);
         $attributes['slug'] = Str::slug(request('name'));
         $post->fill($attributes);

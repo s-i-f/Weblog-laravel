@@ -16,7 +16,7 @@ class Post extends Model
         'slug',
         'excerpt',
         'body',
-        'premium'
+        'is_premium'
     ];
 
     public function category() {
