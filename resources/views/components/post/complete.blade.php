@@ -8,32 +8,35 @@
         </p>
         @endif
         <p>Written by <a class="font-bold" href="{{ route('users.show', $post->user->name) }}">{{ $post->user->name }}</a>
-        in <a class="font-bold" href="{{ route('categories.show', $post->category->slug) }}">{{ ucwords($post->category->name) }}</a></p>
+            in <a class="font-bold" href="{{ route('categories.show', $post->category->slug) }}">{{ ucwords($post->category->name) }}</a></p>
         <p class="text-xs italic">Published
             <time title="{{$post->created_at}}">{{$post->created_at->diffForHumans()}}</time>
         </p>
         <p>{{ $post->body }}</p>
     </div>
 
-    <section class="col-span-8 col-start-5 mt-10">
-        <article class="flex bg-slate-200 border border-slate-300 rounded-md p-4 space-x-3">
-            <div  class="flex-shrink-0">
-                <img src="https://i.pravatar.cc/40" alt="" width="40" height="40" class="rounded-md">
-            </div>
+    <section class="col-span-8 col-start-5 mt-10 space-y-3">
+        <x-post.panel class="bg-slate-200/30">
+            <form action="#" method="post">
+                @csrf
 
-            <div>
-                <header class="mb-4">
-                    <h3 class="font-bold">John Doe</h3>
-                    <p class="text-xs">
-                        Posted
-                        <time>1 day ago</time>
-                    </p>
+                <header class="flex items-center">
+                    <img src="https://i.pravatar.cc/40?u={{ auth()->id() }}" alt="" width="40" height="40" class="rounded-full">
+                    <h2 class="ml-4">Leave a comment</h2>
                 </header>
 
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ac justo quis nulla facilisis gravida.
-                </p>
-            </div>
-        </article>
+                <div class="mt-4">
+                    <textarea name="body" class="w-full text-sm rounded-md shadow-sm border-slate-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="" placeholder="Type here..." cols="30" rows="5"></textarea>
+                </div>
+
+                <div class="flex justify-end">
+                    <x-primary-button>Post</x-primary-button>
+                </div>
+            </form>
+        </x-post.panel>
+
+        @foreach ($post->comments as $comment)
+            <x-post.comment :comment="$comment" />
+        @endforeach
     </section>
 </article>
