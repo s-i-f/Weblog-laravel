@@ -12,6 +12,7 @@ use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -78,6 +79,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('admin/{post:slug}/delete', [PostController::class, 'destroy'])
                 ->name('posts.destroy');
+
+    Route::post('posts/{post:slug}/comments', [CommentController::class, 'store'])
+                ->name('comments.store');
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');

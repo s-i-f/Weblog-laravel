@@ -10,7 +10,7 @@
     <p>Written by <a class="font-bold" href="{{ route('users.show', $post->user->name) }}">{{ $post->user->name }}</a>
         in <a class="font-bold" href="{{ route('categories.show', $post->category->slug) }}">{{ ucwords($post->category->name) }}</a></p>
     <p class="text-xs italic">Published
-        <time title="{{$post->created_at}}">{{$post->created_at->diffForHumans()}}</time>,
+        <time title="{{$post->created_at->format('d-m-Y H:i')}}">{{$post->created_at->diffForHumans()}}</time>,
          {{ $post->comments->count() }} comments
     </p>
     <p>{{ $post->excerpt }}</p>

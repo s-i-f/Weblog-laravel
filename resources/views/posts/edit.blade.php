@@ -36,7 +36,7 @@
 
                 <br>
                 <x-input-label for="is_premium">Premium:</x-input-label><br>
-                    <input type="radio" id="is_premium" name="is_premium" value="1">
+                    <input type="radio" id="is_premium" name="is_premium" checked value="1">
                     <x-input-label for="is_premium">Yes</x-input-label>
                     <input type="radio" id="is_premium" name="is_premium" value="0">                
                     <x-input-label for="is_premium">No</x-input-label><br>
