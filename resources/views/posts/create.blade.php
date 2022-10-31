@@ -1,7 +1,7 @@
 <x-app>
     <x-slot name="slot" >
         <section class="p-8" >
-            <form action="{{ route('posts.store') }}" method="post">
+            <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <x-input-label for="name">Title:</x-input-label><br>
                     <x-text-input type="text" name="name" id="name" value="{{ old('name') }}"></x-text-input>
@@ -31,6 +31,13 @@
                     <x-post.form.error name="body"/>
 
                 <br>
+                <x-input-label for="thumbnail">Thumbnail:</x-input-label><br>
+                    <x-text-input type="file" id="thumbnail" name="thumbnail" value="{{ old('thumbnail') }}"></x-text-input>
+
+                    <x-post.form.error name="thumbnail"/>
+
+
+                <br><br>
                 <x-input-label for="is_premium">Premium:</x-input-label><br>
                     <input type="radio" id="is_premium" name="is_premium" value="1">
                     <x-input-label for="is_premium">Yes</x-input-label>
