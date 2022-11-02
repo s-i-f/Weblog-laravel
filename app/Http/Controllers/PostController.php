@@ -50,14 +50,18 @@ class PostController extends Controller
     {
         $attributes = $request->validate([
             'name' => 'required',
-            'thumbnail' => ['required', 'image'],
+            'thumbnail' => 'image',
             'excerpt' => 'required',
             'body' => 'required',
             'category_id' => ['required', Rule::exists('categories', 'id'),
             'is_premium' => 'required']
         ]);
         $attributes['slug']= Str::slug(request('name'));
-        $attributes['thumbnail']= $request->file('thumbnail')->store('thumbnails');
+        
+        if($request['thumbnail']) 
+        {
+            $attributes['thumbnail'] = $request->file('thumbnail')->store('thumbnails');
+        };
 
         Auth::user()->posts()->create($attributes);        
         return redirect()->route('users.index'); 
@@ -107,13 +111,18 @@ class PostController extends Controller
         $attributes = $request->validate([
             'name' => 'required',
             'excerpt' => 'required',
-            'thumbnail' => ['required', 'image'],
+            'thumbnail' => 'image',
             'body' => 'required',
             'category_id' => ['required', Rule::exists('categories', 'id')],
             'is_premium' => 'required'
         ]);
         $attributes['slug'] = Str::slug(request('name'));
-        $attributes['thumbnail']= $request->file('thumbnail')->store('thumbnails');
+
+        if($request['thumbnail']) 
+        {
+            $attributes['thumbnail'] = $request->file('thumbnail')->store('thumbnails');
+        };
+
         $post->fill($attributes);
         $post->save();
         return redirect()->route('users.index'); 

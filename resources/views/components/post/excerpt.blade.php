@@ -1,6 +1,5 @@
 <article class="max-w-7xl px-8 mt-6 text-slate-900 lg:grid lg:grid-cols-12">
-    <div class="col-span-2"></div>
-    <div class="col-span-10">
+    <div class="col-span-10 col-start-3 ">
         <a class=" text-lg font-bold max-w-fit hover:text-indigo-700 hover:underline" href="{{ route('posts.show', $post->slug) }}">
             {{ $post->name }}
         </a>
