@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="border-b border-slate-100">
+<nav x-data="{ open: false }" class="border-b border-slate-100"> 
         
     <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -36,7 +36,7 @@
             </div>
             @auth
                 <!-- Settings Dropdown -->
-                <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <div class="flex items-center ml-6">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button class="flex items-center text-sm font-medium text-black-600 hover:text-indigo-700 hover:border-slate-300 focus:outline-none focus:text-slate-700 focus:border-slate-300 transition duration-150 ease-in-out">

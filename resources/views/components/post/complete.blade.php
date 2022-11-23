@@ -1,7 +1,7 @@
-<article class="max-w-7xl px-8 mt-6 text-slate-900 lg:grid lg:grid-cols-12 gap-x-10">
-    <div class="col-span-3 lg:text-center mb-10 p-2">
+<article class="max-w-7xl px-8 mt-6 text-slate-900 sm:grid sm:grid-cols-12 gap-x-10">
+    <div class="col-span-3 text-center mb-10 p-2">
         @if ($post->thumbnail)
-            <img src="/storage/{{ $post->thumbnail }}" alt="" width="300" height="250" class="rounded-md">
+            <img src="/storage/{{ $post->thumbnail }}" alt="" width="70%" height="70%" class="rounded-md mx-auto">
         @endif
     </div>
     <div class="col-span-9">

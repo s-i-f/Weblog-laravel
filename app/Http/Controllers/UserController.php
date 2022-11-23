@@ -93,6 +93,7 @@ class UserController extends Controller
             'name' => ['required', 'min:2', 'max:255' ],
             'username' => ['required', 'min:3', 'max:255', Rule::unique('users', 'username')->ignore($user->id)], 
             'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user->id)],
+            'is_premium' => ['required']
         ]);
         
         $updatedUser->fill($attributes);
