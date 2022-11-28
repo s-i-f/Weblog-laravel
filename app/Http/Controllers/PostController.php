@@ -48,13 +48,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        
         $attributes = $request->validate([
             'name' => 'required',
             'thumbnail' => 'image',
             'excerpt' => 'required',
             'body' => 'required',
-            'category_id' => ['required', Rule::exists('categories', 'id'),
-            'is_premium' => 'required']
+            'category_id' => ['required', Rule::exists('categories', 'id')], 
+            'is_premium' => 'required'
         ]);
         $attributes['slug']= Str::slug(request('name'));
         
@@ -62,7 +63,7 @@ class PostController extends Controller
         {
             $attributes['thumbnail'] = $request->file('thumbnail')->store('thumbnails');
         };
-
+        
         Auth::user()->posts()->create($attributes);        
         return redirect()->route('users.index'); 
 

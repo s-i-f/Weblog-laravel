@@ -5,12 +5,16 @@
 
         </h1>
 
-        <a class="px-8 text-slate-900 text-xs" href="{{ route('users.edit', Auth::user()->username)}}">
+        <a class="px-8 text-slate-900 text-xs italic" href="{{ route('users.edit', Auth::user()->username)}}">
             Edit
         </a>
 
         <h1 class="px-8 mt-6 text-slate-900">
             Posts by me
+                <a class="px-8 text-slate-900 text-xs italic" 
+                href="{{ route('posts.create', Auth::user()->username)}}">
+                add new post
+                </a>
         </h1>
 
         <div class="px-8 my-3">
