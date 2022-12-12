@@ -70,6 +70,15 @@
                                 </x-dropdown-link>
                             </form>
 
+                            <form method="GET" action="{{ route('categories.create') }}">
+                                @csrf
+                                <x-dropdown-link :href="route('categories.create')"
+                                        onclick="event.preventDefault();
+                                                    this.closest('form').submit();">
+                                    {{ __('Create new category') }}
+                                </x-dropdown-link>
+                            </form>
+
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <x-dropdown-link :href="route('logout')"

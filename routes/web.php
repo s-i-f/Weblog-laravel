@@ -59,6 +59,11 @@ Route::get('admin/posts/create', [PostController::class, 'create'])
 
 Route::post('admin/posts', [PostController::class, 'store'])
     ->name('posts.store');
+    
+Route::get('admin/categories/create', [CategoryController::class, 'create'])
+        ->name('categories.create');
 
+Route::post('admin/categories/create', [CategoryController::class, 'store'])
+        ->name('categories.store');
 
 require __DIR__.'/auth.php';
