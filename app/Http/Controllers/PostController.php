@@ -20,12 +20,21 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::latest()->with('user', 'category')->get();
+        $categories = Category::all();
+        
+        // if (request('search')){
+        //     $posts  
+        //         ->where('name', 'like', '%' . request('search') . '%')
+        //         ->orWhere('body', 'like', '%' . request('search') . '%');
+        // };
+
+        // $posts;
         
         if (!Auth::check() || !Auth::user()->is_premium) {
-            $posts = Post::latest()->with('user', 'category')->where('is_premium', 0)->get();
+            $posts->with('user', 'category')->where('is_premium', 0)->get();
         };
         
-        return view('posts.index', ['posts' => $posts]);
+        return view('posts.index', ['posts' => $posts, 'categories' => $categories]);
     }
 
     /**
