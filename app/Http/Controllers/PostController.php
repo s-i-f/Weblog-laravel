@@ -21,7 +21,6 @@ class PostController extends Controller
     {
         $posts = Post::latest()->with('user', 'category')->get();
         $categories = Category::all();
-        
         // if (request('search')){
         //     $posts  
         //         ->where('name', 'like', '%' . request('search') . '%')
@@ -31,7 +30,7 @@ class PostController extends Controller
         // $posts;
         
         if (!Auth::check() || !Auth::user()->is_premium) {
-            $posts->with('user', 'category')->where('is_premium', 0)->get();
+            $posts = Post::latest()->with('user', 'category')->where('is_premium', 0)->get();
         };
         
         return view('posts.index', ['posts' => $posts, 'categories' => $categories]);
@@ -56,8 +55,7 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        
+    {        
         $attributes = $request->validate([
             'name' => 'required',
             'thumbnail' => 'image',

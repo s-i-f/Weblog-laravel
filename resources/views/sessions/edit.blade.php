@@ -36,6 +36,7 @@
 
                 <br>
                 <br>
+                <button type="button"><a href="/admin/profile">Cancel</a></button>
                 <x-primary-button>Save changes</x-primary-button>
             </form>
         </section>
