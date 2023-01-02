@@ -4,15 +4,19 @@
             <div class="px-1 sm:px-2">
                 <form action="#" method="get">
                     <x-text-input type="text" name="search" id="search" placeholder="Search"></x-text-input>
+                    <x-primary-button class="mt-2">Submit</x-primary-button>
                 </form>
             </div>
             <div class="px-1 sm:px-2">
-                <form action="#" method="get">
-                    <select class="rounded-md shadow-sm border-slate-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="category_id" id="category" value="{{ old('category_id') }}">
+                <form action="{{ route('categories.edit') }}" method="get"> 
+                    <select class="rounded-md shadow-sm border-slate-300 focus:border-indigo-300 focus:ring
+                        focus:ring-indigo-200 focus:ring-opacity-50" name="category_slug" id="category" value="{{ old('category_slug') }}"
+                    >
                         @foreach ($categories as $category)
-                        <option value="{{$category->id}}">{{ucwords($category->name)}}</option>
+                            <option value="{{$category->slug}}">{{ucwords($category->name)}}</option>
                         @endforeach
                     </select>
+                    <x-primary-button class="mt-2">Submit</x-primary-button>
                 </form>
             </div>
             <div>

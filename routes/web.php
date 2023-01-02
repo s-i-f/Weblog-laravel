@@ -35,6 +35,9 @@ Route::get('posts/{post:slug}', [PostController::class, 'show'])
 
 Route::get('categories/{category:slug}', [CategoryController::class, 'show'])
     ->name('categories.show');
+
+Route::get('categories/test', [CategoryController::class, 'edit'])
+    ->name('categories.edit');
     
 Route::get('authors/{user:name}', [UserController::class, 'show'])
     ->name('users.show');

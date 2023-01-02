@@ -21,6 +21,7 @@ class PostController extends Controller
     {
         $posts = Post::latest()->with('user', 'category')->get();
         $categories = Category::all();
+        
         // if (request('search')){
         //     $posts  
         //         ->where('name', 'like', '%' . request('search') . '%')
