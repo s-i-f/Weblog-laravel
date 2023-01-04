@@ -54,10 +54,10 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
+        $posts = $category->posts->sortByDesc('created_at');
+
         if (!Auth::check() || !Auth::user()->is_premium) {
-            $posts = $category->posts->where('premium', 0)->sortByDesc('created_at');
-        } else {
-            $posts = $category->posts->sortByDesc('created_at');
+            $posts = $category->posts->where('is_premium', 0)->sortByDesc('created_at');
         };
         
         return view('posts.category', ['posts' => $posts]);
@@ -69,9 +69,16 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Category $category)
+    public function search(Request $request)
     {
-        dd($request);
+        $category = Category::with('posts')->where('slug', $request->category_slug)->first();
+        $posts = $category->posts->sortByDesc('created_at');
+
+        if (!Auth::check() || !Auth::user()->is_premium) {
+            $posts = $category->posts->where('is_premium', 0)->sortByDesc('created_at');
+        };
+
+        return view('posts.category', ['posts' => $posts]);
     }
 
     /**

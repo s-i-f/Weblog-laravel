@@ -36,8 +36,8 @@ Route::get('posts/{post:slug}', [PostController::class, 'show'])
 Route::get('categories/{category:slug}', [CategoryController::class, 'show'])
     ->name('categories.show');
 
-Route::get('categories/test', [CategoryController::class, 'edit'])
-    ->name('categories.edit');
+Route::post('categories/search', [CategoryController::class, 'search'])
+    ->name('categories.search');
     
 Route::get('authors/{user:name}', [UserController::class, 'show'])
     ->name('users.show');
@@ -70,3 +70,10 @@ Route::post('admin/categories/create', [CategoryController::class, 'store'])
         ->name('categories.store');
 
 require __DIR__.'/auth.php';
+
+
+// 1. Route (post) aanmaken voor nieuwe functie naar de controller met {category:slug}
+// 2. in het forumulier verwijzen naar bovenstaande route
+// 3. nieuwe functie aanmaken in de controller waar de bovenstaande route naar wijst
+// 4. die op basis van de category(slug) alle posts van de category terug geeft, dit middels RouteModelBinding
+// 5. return view('posts.category', ['posts' => $posts]);

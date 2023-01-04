@@ -18,9 +18,13 @@
                 @include('layouts.layout')
                 
             <!-- Page Content -->
-            <main>
+            <main class="pb-2">
                 {{ $slot }}
             </main>
+
+            <footer class="bg-white shadow">
+                @include('layouts.footer')
+            </footer>
         </div>
     </body>
 </html>
