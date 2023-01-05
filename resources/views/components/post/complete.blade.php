@@ -33,8 +33,8 @@
 
                 <header class="flex items-start flex-shrink-0">
                     <img src="https://i.pravatar.cc/40?u={{ auth()->id() }}" alt="" width="40" height="40" class="rounded-full">
-                    <textarea name="body" class="w-full ml-4 text-sm rounded-md shadow-sm border-slate-300 focus:border-indigo-300 focus:ring 
-                        focus:ring-indigo-200 focus:ring-opacity-50" id="" placeholder="Leave a comment.." rows="5" required>
+                    <textarea name="body" placeholder="Leave a comment.." class="w-full ml-4 text-sm rounded-md shadow-sm border-slate-300 focus:border-indigo-300 focus:ring 
+                        focus:ring-indigo-200 focus:ring-opacity-50" id=""  rows="5" required>
                     </textarea>
                 </header>
 

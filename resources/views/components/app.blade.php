@@ -15,16 +15,15 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-slate-100">
-                @include('layouts.layout')
+            @include('layouts.layout')
                 
             <!-- Page Content -->
             <main class="pb-2">
                 {{ $slot }}
             </main>
 
-            <footer class="bg-white shadow">
-                @include('layouts.footer')
-            </footer>
+            @include('layouts.footer')
+
         </div>
     </body>
 </html>

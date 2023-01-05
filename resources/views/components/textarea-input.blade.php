@@ -5,6 +5,7 @@
     type="text" 
     id="{{$name}}" 
     name="{{$name}}"  
+    value="{{ old('$name') }}"
     required>
 {{$slot}}
 </textarea>

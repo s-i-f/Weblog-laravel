@@ -107,8 +107,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy(User $user)
     {
-        //
+        if($user){
+            $user->delete();
+        }
+        return redirect()->route('posts.index'); 
+ 
     }
 }

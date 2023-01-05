@@ -8,6 +8,9 @@
         <a class="px-8 text-slate-900 text-xs italic" href="{{ route('users.edit', Auth::user()->username)}}">
             Edit
         </a>
+        <a class="px-8 text-slate-900 text-xs italic" href="{{ route('users.destroy', Auth::user()->username)}}">
+            Delete
+        </a>
 
         <h1 class="px-8 mt-6 text-slate-900">
             Posts by me

@@ -1,13 +1,15 @@
 <x-app>
     <x-slot name="slot">
         <div class="flex flex-row-reverse mx-auto py-4 px-4 sm:px-6 lg:px-8">
+            <!-- Search -->
             <div class="px-1 sm:px-2">
-                <form action="#" method="get">
+                <form action="{{ route('posts.search') }}" method="get">
                     @csrf
-                    <x-text-input type="text" name="search" id="search" placeholder="Search"></x-text-input>
+                    <x-text-input type="text" name="search" id="search" placeholder="Search.."></x-text-input>
                     <x-primary-button class="mt-2">Submit</x-primary-button>
                 </form>
             </div>
+            <!-- Search by category -->
             <div class="px-1 sm:px-2">
                 <form action="{{ route('categories.search') }}" method="post"> 
                     @method('POST')

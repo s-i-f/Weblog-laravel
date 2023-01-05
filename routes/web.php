@@ -38,6 +38,9 @@ Route::get('categories/{category:slug}', [CategoryController::class, 'show'])
 
 Route::post('categories/search', [CategoryController::class, 'search'])
     ->name('categories.search');
+
+Route::get('search', [PostController::class, 'search'])
+    ->name('posts.search');
     
 Route::get('authors/{user:name}', [UserController::class, 'show'])
     ->name('users.show');
