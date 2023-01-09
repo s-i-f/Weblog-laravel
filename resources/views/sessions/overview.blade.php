@@ -5,16 +5,14 @@
 
         </h1>
 
-        <a class="px-8 text-slate-900 text-xs italic" href="{{ route('users.edit', Auth::user()->username)}}">
+        <a class="px-8 text-slate-900 text-xs italic hover:text-indigo-700 hover:underline" 
+            href="{{ route('users.edit', Auth::user()->username)}}">
             Edit
-        </a>
-        <a class="px-8 text-slate-900 text-xs italic" href="{{ route('users.destroy', Auth::user()->username)}}">
-            Delete
         </a>
 
         <h1 class="px-8 mt-6 text-slate-900">
             Posts by me
-                <a class="px-8 text-slate-900 text-xs italic" 
+                <a class="px-8 text-slate-900 text-xs italic hover:text-indigo-700 hover:underline" 
                 href="{{ route('posts.create', Auth::user()->username)}}">
                 add new post
                 </a>
@@ -24,7 +22,7 @@
             <table>
                 @foreach ($posts as $post)
                 <tr>
-                    <td class="px-8 mt-6 text-slate-900">
+                    <td class="px-8 mt-6 text-slate-900 hover:underline">
                         <a class="font-bold" href="{{ route('posts.show', $post->slug) }}">
                             <h2>{{ $post->name }}</h2>
                         </a>

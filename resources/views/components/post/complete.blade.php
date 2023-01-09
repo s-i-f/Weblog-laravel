@@ -1,10 +1,10 @@
-<article class="max-w-7xl px-8 mt-6 text-slate-900 sm:grid sm:grid-cols-12 gap-x-10">
-    <div class="col-span-3 text-center mb-10 p-2">
+<article class="max-w-7xl px-8 mb-5  py-4  text-slate-900 sm:grid sm:grid-cols-12">
+    <div class="col-span-2 text-center p-2">
         @if ($post->thumbnail)
             <img src="/storage/{{ $post->thumbnail }}" alt="" width="70%" height="70%" class="rounded-md mx-auto">
         @endif
     </div>
-    <div class="col-span-9">
+    <div class="col-span-8">
         <div>
             <h1 class=" text-lg font-bold max-w-fit ">{{ $post->name }}</h1>
             @if ($post->is_premium)
@@ -24,7 +24,8 @@
         </div>
     </div>
 
-    <section class="col-span-9 col-start-4 mt-10 space-y-3">
+    <!-- Comment section -->
+    <section class="col-span-8 col-start-3 mt-5 space-y-3">
         @auth
         <x-post.panel class="bg-slate-200/30">
             <form action="/posts/{{ $post->slug }}/comments" method="POST">

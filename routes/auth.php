@@ -64,7 +64,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('admin/profile', [UserController::class, 'index'])
                 ->name('users.index');
-    
+
     Route::get('{user:username}/profile/delete', [UserController::class, 'destroy'])
                 ->name('users.destroy');
 
@@ -79,7 +79,7 @@ Route::middleware('auth')->group(function () {
     
     Route::post('admin/{post:slug}/edit', [PostController::class, 'update'])
                 ->name('posts.update');
-
+                
     Route::get('admin/{post:slug}/delete', [PostController::class, 'destroy'])
                 ->name('posts.destroy');
 

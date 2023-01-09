@@ -20,6 +20,16 @@ class Post extends Model
         'is_premium'
     ];
 
+    public function scopeFilter($query, array $filters)
+    {   
+        if ($filters['search'] ?? false){
+            $query  
+                ->where('name', 'like', '%' . $filters['search'] . '%')
+                ->orWhere('excerpt', 'like', '%' . $filters['search'] . '%')
+                ->orWhere('body', 'like', '%' . $filters['search'] . '%');
+        };
+    }
+
     public function category() {
         return $this->belongsTo(Category::class);
     }

@@ -136,17 +136,10 @@ class PostController extends Controller
 
     public function search()
     {
-        $posts = Post::latest()->with('user', 'category');
+        $posts = Post::latest()->with('user', 'category')->filter(request(['search']))->get();
         $categories = Category::all();
-        
-        if (request('search')){
-            $posts  
-                ->where('name', 'like', '%' . request('search') . '%')
-                ->orWhere('excerpt', 'like', '%' . request('search') . '%')
-                ->orWhere('body', 'like', '%' . request('search') . '%');
-        };
 
-        return view('posts.index', ['posts' => $posts->get(), 'categories' => $categories]);
+        return view('posts.index', ['posts' => $posts, 'categories' => $categories]);
 
     }
 

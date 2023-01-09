@@ -1,6 +1,7 @@
 <x-app>
     <x-slot name="slot">
         <section class="p-8">
+            <h2 class="mb-2 text-lg font-bold italic">Edit your profile</h2>
             <form action="{{ route('users.update', Auth::user()->username) }}" method="post" class="mx-auto">
                 @method('POST')
                 @csrf
@@ -39,6 +40,16 @@
                 <button type="button"><a href="/admin/profile">Cancel</a></button>
                 <x-primary-button>Save changes</x-primary-button>
             </form>
+        </section>
+        <section class="p-8">
+        <h2 class="mb-2 text-lg font-bold italic">Or delete your profile</h2>
+            <a class="text-slate-900 text-xs hover:text-indigo-700 hover:underline" href="{{ route('users.destroy', Auth::user()->username)}}">
+                Click here to delete profile
+            </a>
+            <!-- <form action="{{  route('users.destroy', Auth::user()->username) }}">
+                @csrf
+                <x-primary-button>Delete</x-primary-button>
+            </form> -->
         </section>
 
     </x-slot>
