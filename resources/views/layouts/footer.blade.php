@@ -5,7 +5,14 @@
 </footer>
 
 <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 text-right h-12">
-        <p class="p-3 text-sm">
-                Want to stay updated? <a class="hover:text-indigo-700 hover:underline" href="#">Click here</a> to sign up for the mailing list!
-        </p>
+        @auth   
+                <p class="p-3 text-sm">
+                        Want to stay updated? <a class="hover:text-indigo-700 hover:underline" href="{{ route('mailinglist.signup') }}">
+                                Click here</a> to sign up for the mailing list!
+                </p>
+        @else
+                <p class="p-3 text-sm">
+                        
+                </p>
+        @endauth
 </div>

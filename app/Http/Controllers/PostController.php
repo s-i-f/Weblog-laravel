@@ -20,17 +20,15 @@ class PostController extends Controller
     public function index()
     {
 
-        $posts = Post::latest()->with('user', 'category')->get();
+        $posts = Post::latest()->with('user', 'category');
         $categories = Category::all();
         
         if (!Auth::check() || !Auth::user()->is_premium) {
-            $posts = Post::latest()->with('user', 'category')->where('is_premium', 0)->get();
+            $posts = Post::latest()->with('user', 'category')->where('is_premium', 0);
         };
-        
-        // dd($posts);
 
+        return view('posts.index', ['posts' => $posts->paginate(5), 'categories' => $categories]);
 
-        return view('posts.index', ['posts' => $posts, 'categories' => $categories]);
     }
 
     /**
@@ -136,7 +134,7 @@ class PostController extends Controller
 
     public function search()
     {
-        $posts = Post::latest()->with('user', 'category')->filter(request(['search']))->get();
+        $posts = Post::latest()->with('user', 'category')->filter(request(['search']))->paginate();
         $categories = Category::all();
 
         return view('posts.index', ['posts' => $posts, 'categories' => $categories]);

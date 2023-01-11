@@ -1,7 +1,7 @@
 <x-app>
     <x-slot name="slot">
         <section class="p-8">
-            <h2 class="mb-2 text-lg font-bold italic">Edit your profile</h2>
+            <h2 class="mb-2 text-lg font-semibold italic">Edit your profile</h2>
             <form action="{{ route('users.update', Auth::user()->username) }}" method="post" class="mx-auto">
                 @method('POST')
                 @csrf
@@ -42,7 +42,7 @@
             </form>
         </section>
         <section class="p-8">
-        <h2 class="mb-2 text-lg font-bold italic">Or delete your profile</h2>
+        <h2 class="mb-2 text-lg font-semibold italic">Or delete your profile</h2>
             <a class="text-slate-900 text-xs hover:text-indigo-700 hover:underline" href="{{ route('users.destroy', Auth::user()->username)}}">
                 Click here to delete profile
             </a>

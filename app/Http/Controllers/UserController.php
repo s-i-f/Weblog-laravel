@@ -47,7 +47,7 @@ class UserController extends Controller
         ]);
         
         auth()->login(User::create($attributes));
-        return redirect('/')->with('success', 'Your account has been created and you are now logged in');
+        return redirect('/')->with('success', 'Your account has been created and you are now logged in!');
     }
 
     /**
@@ -98,7 +98,17 @@ class UserController extends Controller
         
         $updatedUser->fill($attributes);
         $updatedUser->save();
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('success', "You've successfully updated your profile!");
+    }
+
+    public function mailinglist()
+    {
+        return view('sessions.mailinglist');
+    }
+
+    public function mailinglistSuccess() 
+    {
+        return redirect()->route('posts.index')->with('success', "You've successfully signed up for the mailinglist!");
     }
 
     /**
