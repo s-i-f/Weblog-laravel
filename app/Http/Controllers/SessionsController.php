@@ -33,7 +33,7 @@ class SessionsController extends Controller
         }
         
         $user = Auth::user();
-        return redirect('/')->with(['user' => $user]);
+        return redirect('/')->with(['user' => $user])->with('success', "Welcome back!");
 
     }
 

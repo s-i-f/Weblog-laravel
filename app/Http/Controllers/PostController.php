@@ -27,7 +27,7 @@ class PostController extends Controller
             $posts = Post::latest()->with('user', 'category')->where('is_premium', 0);
         };
 
-        return view('posts.index', ['posts' => $posts->paginate(5), 'categories' => $categories]);
+        return view('posts.index', ['posts' => $posts->paginate(7), 'categories' => $categories]);
 
     }
 
@@ -134,10 +134,14 @@ class PostController extends Controller
 
     public function search()
     {
-        $posts = Post::latest()->with('user', 'category')->filter(request(['search']))->paginate();
+        $posts = Post::latest()->with('user', 'category')->filter(request(['search']));
         $categories = Category::all();
+        
+        if (!Auth::check() || !Auth::user()->is_premium) {
+            $posts = Post::latest()->with('user', 'category')->filter(request(['search']))->where('is_premium', 0);
+        };
 
-        return view('posts.index', ['posts' => $posts, 'categories' => $categories]);
+        return view('posts.index', ['posts' => $posts->paginate(), 'categories' => $categories]);
 
     }
 

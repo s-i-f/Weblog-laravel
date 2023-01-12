@@ -29,9 +29,10 @@ class DatabaseSeeder extends Seeder
             'is_premium' => true,
             'remember_token' => Str::random(10),
         ]);
-        User::factory(6)->create();
-        Category::factory(10)->create();
-        Post::factory(7)->create();
-        Comment::factory(6)->create();
+        
+        User::factory(9)->create();
+        Category::factory(15)->create();
+        Post::factory(10)->create();
+        Comment::factory(10)->create();
     }
 }
