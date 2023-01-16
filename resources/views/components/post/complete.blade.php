@@ -1,7 +1,7 @@
 <article class="max-w-7xl px-8 mb-5  py-4  text-slate-900 sm:grid sm:grid-cols-12">
     <div class="col-span-2 text-center p-2">
         @if ($post->thumbnail)
-            <img src="/storage/{{ $post->thumbnail }}" alt="" width="70%" height="70%" class="rounded-md mx-auto">
+        <img src="/storage/{{ $post->thumbnail }}" alt="" width="70%" height="70%" class="rounded-md mx-auto">
         @endif
     </div>
     <div class="col-span-8">
@@ -35,7 +35,7 @@
                 <header class="flex items-start flex-shrink-0">
                     <img src="https://i.pravatar.cc/40?u={{ auth()->id() }}" alt="" width="40" height="40" class="rounded-full">
                     <textarea name="body" placeholder="Leave a comment.." class="w-full ml-4 text-sm rounded-md shadow-sm border-slate-300 focus:border-indigo-300 focus:ring 
-                        focus:ring-indigo-200 focus:ring-opacity-50" id=""  rows="5" required>
+                        focus:ring-indigo-200 focus:ring-opacity-50" id="" rows="5" required>
                     </textarea>
                 </header>
 
@@ -56,7 +56,7 @@
         @endauth
 
         @foreach ($post->comments->reverse() as $comment)
-        <x-post.comment :comment="$comment" />
+        <x-post.comment :comment="$comment" :post="$post" />
         @endforeach
     </section>
 </article>

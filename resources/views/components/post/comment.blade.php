@@ -1,4 +1,4 @@
-@props(['comment'])
+@props(['comment', 'post'])
 <x-post.panel class="bg-slate-200">
     <article class="flex space-x-4">
         <div class="flex-shrink-0">
@@ -7,7 +7,14 @@
 
         <div>
             <header class="mb-4">
-                <h3 class="font-bold">{{ $comment->user->username }}</h3>
+                <div class="inline">
+                    @if ($post->user_id === $comment->user_id)
+                    <h3 class="font-bold">{{ $comment->user->name }} <span class="italic font-normal text-sm">(Author)</span></h3>
+                    @else
+                    <h3 class="font-bold">{{ $comment->user->name }}</h3>
+                    @endif
+                </div>
+
                 <p class="text-xs italic">
                     Posted
                     <time title="{{$comment->created_at->format('d-m-Y H:i')}}">{{$comment->created_at->diffForHumans()}}</time>
