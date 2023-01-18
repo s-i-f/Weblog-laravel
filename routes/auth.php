@@ -86,10 +86,10 @@ Route::middleware('auth')->group(function () {
     Route::post('posts/{post:slug}/comments', [CommentController::class, 'store'])
                 ->name('comments.store');
     
-    Route::get('mailinglist/signup', [UserController::class, 'mailinglist']) 
+    Route::get('mailinglist/{user:username}/signup', [UserController::class, 'mailinglist']) 
                 ->name('mailinglist.signup');
                 
-    Route::post('mailinglist/signup/success', [UserController::class, 'mailinglistSuccess'])
+    Route::post('mailinglist/{user:username}/signup/success', [UserController::class, 'mailinglistSuccess'])
                 ->name('mailinglist.success');
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])

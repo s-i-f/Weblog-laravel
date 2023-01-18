@@ -36,12 +36,12 @@
                     
                 <br>
                 <x-input-label for="thumbnail">Thumbnail:</x-input-label><br>
-                    <x-text-input type="file" id="thumbnail" name="thumbnail" value="{{ old('thumbnail') }}"></x-text-input>
+                    <input  type="file" id="thumbnail" name="thumbnail" value="{{ old('thumbnail') }}"></input>
 
                     <x-post.form.error name="thumbnail"/>
 
 
-                <br><br>
+                <br>
                 <x-input-label for="is_premium">Premium:</x-input-label><br>
                     @if ($post->is_premium)
                         <input type="radio" id="is_premium" name="is_premium" checked value="1">
@@ -57,7 +57,8 @@
                     <x-post.form.error name="is_premium"/>
 
                 <br>
-                <x-primary-button>Submit</x-primary-button>
+                <button type="button"><a href="/admin/profile">Cancel</a></button>
+                <x-primary-button>Save changes</x-primary-button>
             </form>
         </section>
     </x-slot>

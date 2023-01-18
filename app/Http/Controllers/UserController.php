@@ -43,7 +43,8 @@ class UserController extends Controller
             'username' => ['required', 'min:3', 'max:255', Rule::unique('users', 'username')], 
             'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')],
             'password' => ['required', 'min:7', 'max:255'],
-            'is_premium' => ['required', 'boolean']
+            'is_premium' => ['required', 'boolean'],
+            'mailinglist' => ['required']
         ]);
         
         auth()->login(User::create($attributes));
@@ -77,7 +78,7 @@ class UserController extends Controller
     {
         return view('sessions.edit', ['user' => $user]); 
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -93,7 +94,8 @@ class UserController extends Controller
             'name' => ['required', 'min:2', 'max:255' ],
             'username' => ['required', 'min:3', 'max:255', Rule::unique('users', 'username')->ignore($user->id)], 
             'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user->id)],
-            'is_premium' => ['required']
+            'is_premium' => ['required'],
+            'mailinglist' => ['required']
         ]);
         
         $updatedUser->fill($attributes);
@@ -101,14 +103,23 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', "You've successfully updated your profile!");
     }
 
-    public function mailinglist()
+    public function mailinglist(User $user)
     {
-        return view('sessions.mailinglist');
+        return view('sessions.mailinglist', ['user' => $user]);
     }
 
-    public function mailinglistSuccess() 
+    public function mailinglistSuccess(Request $request, User $user) 
     {
-        return redirect()->route('posts.index')->with('success', "You've successfully signed up for the mailinglist!");
+        $updatedUser = User::findOrFail($user->id);
+
+        $attributes = $request->validate([
+            'mailinglist' => ['required']
+        ]);
+
+        $updatedUser->fill($attributes);
+        $updatedUser->save();
+
+        return redirect()->route('posts.index')->with('success', "Your mailinglist preferences have been saved!");
     }
 
     /**

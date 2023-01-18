@@ -16,8 +16,8 @@
                 </div>
 
                 <p class="text-xs italic">
-                    Posted
-                    <time title="{{$comment->created_at->format('d-m-Y H:i')}}">{{$comment->created_at->diffForHumans()}}</time>
+                    
+                    <time title="{{$comment->created_at->format('d-m-Y H:i')}}">Posted {{$comment->created_at->diffForHumans()}}</time>
                 </p>
             </header>
 
