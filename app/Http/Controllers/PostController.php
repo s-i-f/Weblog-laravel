@@ -79,6 +79,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        // TODO: schrijf aparte middleware / policy om te voorkomen dat een niet premium user een premium bericht kan lezen
         if (!Auth::check() || !Auth::user()->is_premium) {
             if ($post->is_premium) {
                 return redirect('/');
@@ -134,6 +135,8 @@ class PostController extends Controller
 
     public function search()
     {
+        // TODO: in het slechtste geval worden er 2 queries uitgevoerd terwijl er maar 1 nodig is. Pas de code aan zodat er nooit
+        // meer dan 1 query wordt uitgevoerd voor het ophalen van posts
         $posts = Post::latest()->with('user', 'category')->filter(request(['search']));
         $categories = Category::all();
         

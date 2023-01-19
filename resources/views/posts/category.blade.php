@@ -4,6 +4,7 @@
             
             <!-- Posts -->
             <div class="col-span-7 col-start-2 row-start-1">
+                <!-- TODO: if-statement is overbodig? -->
                 @if ($posts->count())
                     @foreach ($posts as $post)
                     <x-post.excerpt :post="$post"></x-post.excerpt>

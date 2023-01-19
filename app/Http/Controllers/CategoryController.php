@@ -36,12 +36,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        // TODO: aparte request validation class maken voor validation rules voor hergebruik
         $attributes = $request->validate([
             'name' => 'required'
         ]);
         $attributes['slug']= fake()->unique()->slug();
         
-        Category::create($attributes);        
+        Category::create($attributes);   
+        
+        // TODO: onderstaande route bestaat niet?
         return redirect()->route('sessions.overview'); 
 
     }

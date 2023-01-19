@@ -27,6 +27,8 @@ Route::get('/home', function () {
     return view('welcome');
 });
 
+// TODO: routes zijn ok, maar je kunt veel regles code uitsparen door resource-routes toe te passen (zie documentatie)
+
 Route::get('/', [PostController::class, 'index'])
     ->name('posts.index');
 

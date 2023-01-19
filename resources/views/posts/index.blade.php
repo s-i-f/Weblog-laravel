@@ -25,6 +25,7 @@
             </div>
             <!-- Posts -->
             <div class="col-span-7 col-start-2 row-start-1">
+                <!-- TODO: pas inspringen toe om beter te zien wat code hierarchie is. -->
                 @if ($posts->count())
                 @foreach ($posts as $post)
                 <x-post.excerpt :post="$post"></x-post.excerpt>
